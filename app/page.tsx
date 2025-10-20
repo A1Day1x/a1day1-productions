@@ -2,14 +2,12 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
 
   const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
     setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
@@ -175,7 +173,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Branded Content', desc: 'Compelling stories that connect your brand with your audience' },
-              { title: 'Brand Documentaries', desc: 'Deep-dive narratives that showcase your company\'s journey' },
+              { title: 'Brand Documentaries', desc: 'Deep-dive narratives that showcase your company&apos;s journey' },
               { title: 'Narrative & Doc Films', desc: 'Cinematic storytelling with emotional depth and impact' },
               { title: 'Corporate Shoots', desc: 'Professional production for internal and external communications' },
               { title: 'Commercials', desc: 'High-impact ads that drive engagement and conversions' },
@@ -219,7 +217,7 @@ export default function Home() {
               },
             ].map((testimonial, idx) => (
               <div key={idx} className="p-8 bg-black rounded-xl border border-white/10">
-                <p className="text-lg text-gray-300 mb-6 italic">"{testimonial.quote}"</p>
+                <p className="text-lg text-gray-300 mb-6 italic">&quot;{testimonial.quote}&quot;</p>
                 <p className="font-semibold text-green-400">— {testimonial.author}</p>
               </div>
             ))}
@@ -240,7 +238,7 @@ export default function Home() {
                 With a team of award-winning creatives, we specialize in branded content, documentaries, corporate productions, and commercials that deliver results.
               </p>
               <p className="text-xl text-gray-300 leading-relaxed">
-                We're committed to excellence, professionalism, and generously supporting the local creative community.
+                We&apos;re committed to excellence, professionalism, and generously supporting the local creative community.
               </p>
             </div>
             <div className="relative h-96">
@@ -255,7 +253,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Create?</h2>
           <p className="text-xl text-gray-300 mb-12">
-            Let's bring your vision to life. Get in touch with our team to discuss your next project.
+            Let&apos;s bring your vision to life. Get in touch with our team to discuss your next project.
           </p>
 
           <div className="space-y-6">
