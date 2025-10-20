@@ -21,9 +21,17 @@ export default function Home() {
     setFormStatus('submitting');
 
     const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      projectType: formData.get('projectType'),
+      message: formData.get('message')
+    };
 
     try {
-      const response = await fetch('https://formspree.io/f/xanyqbvp', {
+      // Using Formspree - free tier allows 50 submissions/month
+      const response = await fetch('https://formspree.io/f/mjkvvpvb', {
         method: 'POST',
         body: formData,
         headers: {
@@ -37,10 +45,12 @@ export default function Home() {
         setTimeout(() => setFormStatus('idle'), 5000);
       } else {
         setFormStatus('error');
+        setTimeout(() => setFormStatus('idle'), 5000);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       setFormStatus('error');
+      setTimeout(() => setFormStatus('idle'), 5000);
     }
   };
 
@@ -286,6 +296,9 @@ export default function Home() {
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            <input type="hidden" name="_subject" value="New Consultation Request from A1 Day1 Website" />
+            <input type="hidden" name="_cc" value="info@a1day1productions.com" />
+            
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Full Name *
@@ -295,7 +308,7 @@ export default function Home() {
                 id="name"
                 name="name"
                 required
-                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition text-white"
                 placeholder="John Doe"
               />
             </div>
@@ -309,7 +322,7 @@ export default function Home() {
                 id="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition text-white"
                 placeholder="john@example.com"
               />
             </div>
@@ -322,7 +335,7 @@ export default function Home() {
                 type="tel"
                 id="phone"
                 name="phone"
-                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition text-white"
                 placeholder="(555) 123-4567"
               />
             </div>
@@ -335,7 +348,7 @@ export default function Home() {
                 id="projectType"
                 name="projectType"
                 required
-                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition text-white"
               >
                 <option value="">Select a service...</option>
                 <option value="Branded Content">Branded Content</option>
@@ -357,20 +370,20 @@ export default function Home() {
                 name="message"
                 required
                 rows={5}
-                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition resize-none"
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition resize-none text-white"
                 placeholder="Share your vision, goals, timeline, and any other details..."
               ></textarea>
             </div>
 
             {formStatus === 'success' && (
               <div className="p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400">
-                Thank you! We&apos;ve received your message and will get back to you within 24 hours.
+                ✅ Thank you! We&apos;ve received your message and will get back to you within 24 hours.
               </div>
             )}
 
             {formStatus === 'error' && (
               <div className="p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400">
-                Oops! Something went wrong. Please try again or email us directly at info@a1day1productions.com
+                ❌ Oops! Something went wrong. Please try again or email us directly at info@a1day1productions.com
               </div>
             )}
 
@@ -385,7 +398,7 @@ export default function Home() {
 
           <div className="mt-8 text-center">
             <p className="text-gray-400 mb-2">Or reach us directly:</p>
-            <a href="mailto:info@a1day1productions.com" className="text-green-400 hover:text-green-300 transition">
+            <a href="mailto:info@a1day1productions.com" className="text-green-400 hover:text-green-300 transition text-lg font-semibold">
               info@a1day1productions.com
             </a>
           </div>
