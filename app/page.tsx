@@ -257,7 +257,7 @@ export default function Home() {
           </p>
 
           {/* Embedded Formspree Form */}
-          <form action="https://formspree.io/f/mjkvvpvb" method="POST" className="space-y-6">
+          <form action="https://formspree.io/f/mldpkgzj" method="POST" className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Full Name *
