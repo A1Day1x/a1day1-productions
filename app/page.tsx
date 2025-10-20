@@ -6,6 +6,14 @@ import { Menu, X } from 'lucide-react';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    projectType: '',
+    message: ''
+  });
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
@@ -13,6 +21,39 @@ export default function Home() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormStatus('submitting');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', phone: '', projectType: '', message: '' });
+        setTimeout(() => setFormStatus('idle'), 5000);
+      } else {
+        setFormStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormStatus('error');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
   return (
@@ -92,7 +133,7 @@ export default function Home() {
                 onClick={() => scrollToSection('contact')}
                 className="px-8 py-4 bg-green-500 text-black font-bold text-lg rounded-lg hover:bg-green-400 transition transform hover:scale-105"
               >
-                Start Your Project
+                Book Free Consultation
               </button>
             </div>
             <div className="relative h-96 md:h-full">
@@ -250,20 +291,125 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6 bg-gray-950">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">Ready to Create?</h2>
-          <p className="text-xl text-gray-300 mb-12">
-            Let&apos;s bring your vision to life. Get in touch with our team to discuss your next project.
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-center">Book Your Free Consultation</h2>
+          <p className="text-xl text-gray-300 mb-12 text-center">
+            Let&apos;s bring your vision to life. Fill out the form below and we&apos;ll get back to you within 24 hours.
           </p>
 
-          <div className="space-y-6">
-            <a
-              href="mailto:info@a1day1productions.com"
-              className="inline-block px-8 py-4 bg-green-500 text-black font-bold text-lg rounded-lg hover:bg-green-400 transition transform hover:scale-105"
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium mb-2">
+                Full Name *
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email Address *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+                placeholder="(555) 123-4567"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="projectType" className="block text-sm font-medium mb-2">
+                Project Type *
+              </label>
+              <select
+                id="projectType"
+                name="projectType"
+                required
+                value={formData.projectType}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
+              >
+                <option value="">Select a service...</option>
+                <option value="branded-content">Branded Content</option>
+                <option value="brand-documentary">Brand Documentary</option>
+                <option value="narrative-doc">Narrative & Doc Films</option>
+                <option value="corporate">Corporate Shoot</option>
+                <option value="commercial">Commercial</option>
+                <option value="full-production">Full Production</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium mb-2">
+                Tell us about your project *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                value={formData.message}
+                onChange={handleChange}
+                rows={5}
+                className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition resize-none"
+                placeholder="Share your vision, goals, timeline, and any other details..."
+              ></textarea>
+            </div>
+
+            {formStatus === 'success' && (
+              <div className="p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400">
+                Thank you! We&apos;ve received your message and will get back to you within 24 hours.
+              </div>
+            )}
+
+            {formStatus === 'error' && (
+              <div className="p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400">
+                Oops! Something went wrong. Please try again or email us directly at info@a1day1productions.com
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={formStatus === 'submitting'}
+              className="w-full px-8 py-4 bg-green-500 text-black font-bold text-lg rounded-lg hover:bg-green-400 transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send us an Email
+              {formStatus === 'submitting' ? 'Sending...' : 'Book Free Consultation'}
+            </button>
+          </form>
+
+          <div className="mt-8 text-center">
+            <p className="text-gray-400 mb-2">Or reach us directly:</p>
+            <a href="mailto:info@a1day1productions.com" className="text-green-400 hover:text-green-300 transition">
+              info@a1day1productions.com
             </a>
-            <p className="text-gray-400">or visit us at a1day1productions.com</p>
           </div>
         </div>
       </section>

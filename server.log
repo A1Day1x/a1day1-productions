@@ -1,100 +1,18 @@
 $ next dev --turbopack
+ ⚠ Port 3000 is in use by an unknown process, using available port 3001 instead.
    ▲ Next.js 15.5.3 (Turbopack)
-   - Local:        http://localhost:3000
-   - Network:      http://169.254.0.21:3000
+   - Local:        http://localhost:3001
+   - Network:      http://169.254.0.21:3001
+   - Environments: .env.local
 
  ✓ Starting...
-Attention: Next.js now collects completely anonymous telemetry regarding usage.
-This information is used to shape Next.js' roadmap and prioritize features.
-You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-https://nextjs.org/telemetry
-
- ✓ Ready in 3.1s
+ ✓ Ready in 2.5s
  ○ Compiling / ...
- ✓ Compiled / in 6.8s
- ⨯ ./app/globals.css:4351:8
-Parsing CSS source code failed
-[0m [90m 4349 |[39m   }
- [90m 4350 |[39m }
-[31m[1m>[22m[39m[90m 4351 |[39m [33m@[39m[36mimport[39m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'[39m)[33m;[39m
- [90m      |[39m        [31m[1m^[22m[39m
- [90m 4352 |[39m body {
- [90m 4353 |[39m   font[33m-[39mfamily[33m:[39m [32m'Inter'[39m[33m,[39m [33m-[39mapple[33m-[39msystem[33m,[39m [33mBlinkMacSystemFont[39m[33m,[39m [32m'Segoe UI'[39m[33m,[39m sans[33m-[39mserif[33m;[39m
- [90m 4354 |[39m   font[33m-[39msize[33m:[39m [35m16[39mpx[33m;[39m[0m
-
-@import rules must precede all rules aside from @charset and @layer statements
-
-Import trace:
-  Client Component Browser:
-    ./app/globals.css [Client Component Browser]
-    ./app/layout.tsx [Server Component]
-
-
- ⨯ ./app/globals.css:4351:8
-Parsing CSS source code failed
-[0m [90m 4349 |[39m   }
- [90m 4350 |[39m }
-[31m[1m>[22m[39m[90m 4351 |[39m [33m@[39m[36mimport[39m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'[39m)[33m;[39m
- [90m      |[39m        [31m[1m^[22m[39m
- [90m 4352 |[39m body {
- [90m 4353 |[39m   font[33m-[39mfamily[33m:[39m [32m'Inter'[39m[33m,[39m [33m-[39mapple[33m-[39msystem[33m,[39m [33mBlinkMacSystemFont[39m[33m,[39m [32m'Segoe UI'[39m[33m,[39m sans[33m-[39mserif[33m;[39m
- [90m 4354 |[39m   font[33m-[39msize[33m:[39m [35m16[39mpx[33m;[39m[0m
-
-@import rules must precede all rules aside from @charset and @layer statements
-
-Import trace:
-  Client Component Browser:
-    ./app/globals.css [Client Component Browser]
-    ./app/layout.tsx [Server Component]
-
-
- ○ Compiling /_error ...
- ✓ Compiled /_error in 2.8s
- GET / 500 in 6898ms
- GET / 500 in 9953ms
- ⚠ Cross origin request detected from a-1-day-1.lindy.site to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+ ✓ Compiled / in 6.6s
+ GET / 200 in 2079ms
+ GET / 200 in 7516ms
+ ⚠ Cross origin request detected from a-1-day-1-2.lindy.site to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
 Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
  ○ Compiling /favicon.ico ...
- ✓ Compiled /favicon.ico in 663ms
- GET /favicon.ico 500 in 784ms
- ⨯ ./app/globals.css:4271:8
-Parsing CSS source code failed
-[0m [90m 4269 |[39m   initial[33m-[39mvalue[33m:[39m [35m0[39m[33m;[39m
- [90m 4270 |[39m }
-[31m[1m>[22m[39m[90m 4271 |[39m [33m@[39m[36mimport[39m url([32m'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'[39m)[33m;[39m
- [90m      |[39m        [31m[1m^[22m[39m
- [90m 4272 |[39m [33m:[39mroot {
- [90m 4273 |[39m   [33m--[39mradius[33m:[39m [35m0.625[39mrem[33m;[39m
- [90m 4274 |[39m   [33m--[39mbackground[33m:[39m oklch([35m1[39m [35m0[39m [35m0[39m)[33m;[39m[0m
-
-@import rules must precede all rules aside from @charset and @layer statements
-
-Import trace:
-  Client Component Browser:
-    ./app/globals.css [Client Component Browser]
-    ./app/layout.tsx [Server Component]
-
-
- GET / 500 in 336ms
- GET /favicon.ico 500 in 99ms
- ✓ Compiled in 442ms
- ✓ Compiled / in 17ms
- GET / 200 in 665ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 837ms
- GET / 200 in 185ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 292ms
- GET / 200 in 177ms
- GET / 200 in 191ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 275ms
- GET / 200 in 191ms
- ✓ Compiled in 276ms
- GET / 200 in 316ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 276ms
- GET / 200 in 179ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 274ms
- ✓ Compiled in 323ms
- GET / 200 in 349ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 310ms
- GET / 200 in 206ms
- GET /favicon.ico?favicon.bf3c9292.ico 200 in 282ms
- GET / 200 in 263ms
+ ✓ Compiled /favicon.ico in 588ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 945ms
