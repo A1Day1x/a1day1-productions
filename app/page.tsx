@@ -6,13 +6,6 @@ import { Menu, X } from 'lucide-react';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    projectType: '',
-    message: ''
-  });
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const scrollToSection = (sectionId: string) => {
@@ -23,22 +16,24 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus('submitting');
 
+    const formData = new FormData(e.currentTarget);
+
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://formspree.io/f/xanyqbvp', {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+          'Accept': 'application/json'
+        }
       });
 
       if (response.ok) {
         setFormStatus('success');
-        setFormData({ name: '', email: '', phone: '', projectType: '', message: '' });
+        e.currentTarget.reset();
         setTimeout(() => setFormStatus('idle'), 5000);
       } else {
         setFormStatus('error');
@@ -47,13 +42,6 @@ export default function Home() {
       console.error('Error submitting form:', error);
       setFormStatus('error');
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
   };
 
   return (
@@ -307,8 +295,6 @@ export default function Home() {
                 id="name"
                 name="name"
                 required
-                value={formData.name}
-                onChange={handleChange}
                 className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
                 placeholder="John Doe"
               />
@@ -323,8 +309,6 @@ export default function Home() {
                 id="email"
                 name="email"
                 required
-                value={formData.email}
-                onChange={handleChange}
                 className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
                 placeholder="john@example.com"
               />
@@ -338,8 +322,6 @@ export default function Home() {
                 type="tel"
                 id="phone"
                 name="phone"
-                value={formData.phone}
-                onChange={handleChange}
                 className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
                 placeholder="(555) 123-4567"
               />
@@ -353,18 +335,16 @@ export default function Home() {
                 id="projectType"
                 name="projectType"
                 required
-                value={formData.projectType}
-                onChange={handleChange}
                 className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition"
               >
                 <option value="">Select a service...</option>
-                <option value="branded-content">Branded Content</option>
-                <option value="brand-documentary">Brand Documentary</option>
-                <option value="narrative-doc">Narrative & Doc Films</option>
-                <option value="corporate">Corporate Shoot</option>
-                <option value="commercial">Commercial</option>
-                <option value="full-production">Full Production</option>
-                <option value="other">Other</option>
+                <option value="Branded Content">Branded Content</option>
+                <option value="Brand Documentary">Brand Documentary</option>
+                <option value="Narrative & Doc Films">Narrative & Doc Films</option>
+                <option value="Corporate Shoot">Corporate Shoot</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Full Production">Full Production</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 
@@ -376,8 +356,6 @@ export default function Home() {
                 id="message"
                 name="message"
                 required
-                value={formData.message}
-                onChange={handleChange}
                 rows={5}
                 className="w-full px-4 py-3 bg-black border border-white/20 rounded-lg focus:outline-none focus:border-green-500 transition resize-none"
                 placeholder="Share your vision, goals, timeline, and any other details..."
