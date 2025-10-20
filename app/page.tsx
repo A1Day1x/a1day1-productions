@@ -6,51 +6,12 @@ import { Menu, X } from 'lucide-react';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormStatus('submitting');
-
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      projectType: formData.get('projectType'),
-      message: formData.get('message')
-    };
-
-    try {
-      // Using Formspree - free tier allows 50 submissions/month
-      const response = await fetch('https://formspree.io/f/mjkvvpvb', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setFormStatus('success');
-        e.currentTarget.reset();
-        setTimeout(() => setFormStatus('idle'), 5000);
-      } else {
-        setFormStatus('error');
-        setTimeout(() => setFormStatus('idle'), 5000);
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setFormStatus('error');
-      setTimeout(() => setFormStatus('idle'), 5000);
     }
   };
 
@@ -295,10 +256,8 @@ export default function Home() {
             Let&apos;s bring your vision to life. Fill out the form below and we&apos;ll get back to you within 24 hours.
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <input type="hidden" name="_subject" value="New Consultation Request from A1 Day1 Website" />
-            <input type="hidden" name="_cc" value="info@a1day1productions.com" />
-            
+          {/* Embedded Formspree Form */}
+          <form action="https://formspree.io/f/mjkvvpvb" method="POST" className="space-y-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Full Name *
@@ -375,24 +334,11 @@ export default function Home() {
               ></textarea>
             </div>
 
-            {formStatus === 'success' && (
-              <div className="p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400">
-                ✅ Thank you! We&apos;ve received your message and will get back to you within 24 hours.
-              </div>
-            )}
-
-            {formStatus === 'error' && (
-              <div className="p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400">
-                ❌ Oops! Something went wrong. Please try again or email us directly at info@a1day1productions.com
-              </div>
-            )}
-
             <button
               type="submit"
-              disabled={formStatus === 'submitting'}
-              className="w-full px-8 py-4 bg-green-500 text-black font-bold text-lg rounded-lg hover:bg-green-400 transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-8 py-4 bg-green-500 text-black font-bold text-lg rounded-lg hover:bg-green-400 transition transform hover:scale-105"
             >
-              {formStatus === 'submitting' ? 'Sending...' : 'Book Free Consultation'}
+              Book Free Consultation
             </button>
           </form>
 
