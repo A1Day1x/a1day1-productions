@@ -141,3 +141,39 @@ Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allow
  GET / 200 in 574ms
  GET / 200 in 251ms
  ✓ Compiled in 376ms
+ ⨯ ./app/page.tsx:176:102
+Parsing ecmascript source code failed
+[0m [90m 174 |[39m             {[
+ [90m 175 |[39m               { title[33m:[39m [32m'Branded Content'[39m[33m,[39m desc[33m:[39m [32m'Compelling stories that connect your brand with your audience'[39m }[33m,[39m
+[31m[1m>[22m[39m[90m 176 |[39m               { title[33m:[39m [32m'Brand Documentaries'[39m[33m,[39m desc[33m:[39m [32m'Deep-dive narratives that showcase your company'[39ms journey[32m' },[39m
+ [90m     |[39m                                                                                                      [31m[1m^[22m[39m
+ [90m 177 |[39m               { title[33m:[39m [32m'Narrative & Doc Films'[39m[33m,[39m desc[33m:[39m [32m'Cinematic storytelling with emotional depth and impact'[39m }[33m,[39m
+ [90m 178 |[39m               { title[33m:[39m [32m'Corporate Shoots'[39m[33m,[39m desc[33m:[39m [32m'Professional production for internal and external communications'[39m }[33m,[39m
+ [90m 179 |[39m               { title[33m:[39m [32m'Commercials'[39m[33m,[39m desc[33m:[39m [32m'High-impact ads that drive engagement and conversions'[39m }[33m,[39m[0m
+
+Expected '</', got 's'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 3.2s
+ GET / 500 in 3615ms
+ GET /favicon.ico 500 in 103ms
+ ✓ Compiled in 307ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled / in 57ms
+ GET / 200 in 528ms
+ GET / 200 in 624ms
+ GET / 200 in 240ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 279ms
+ ✓ Compiled in 289ms
+ GET / 200 in 525ms
+ GET /favicon.ico?favicon.bf3c9292.ico 200 in 279ms
