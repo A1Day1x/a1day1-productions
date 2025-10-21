@@ -173,7 +173,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: 'Branded Content', desc: 'Compelling stories that connect your brand with your audience' },
-              { title: 'Brand Documentaries', desc: 'Deep-dive narratives that showcase your company&apos;s journey' },
+              { title: 'Brand Documentaries', desc: 'Deep-dive narratives that showcase your company's journey' },
               { title: 'Narrative & Doc Films', desc: 'Cinematic storytelling with emotional depth and impact' },
               { title: 'Corporate Shoots', desc: 'Professional production for internal and external communications' },
               { title: 'Commercials', desc: 'High-impact ads that drive engagement and conversions' },
