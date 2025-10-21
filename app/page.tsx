@@ -161,6 +161,17 @@ export default function Home() {
               ></iframe>
             </div>
           </div>
+          
+          <div className="mt-12 text-center">
+            <a
+              href="https://vimeo.com/a1day1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-8 py-4 bg-green-500 text-black font-bold text-lg rounded-lg hover:bg-green-400 transition transform hover:scale-105"
+            >
+              View Full Portfolio on Vimeo
+            </a>
+          </div>
         </div>
       </section>
 
